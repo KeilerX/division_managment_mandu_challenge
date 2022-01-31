@@ -2,8 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { Table } from 'antd';
 import './DivisionTable.css';
 
-/* export class DivisionTable extends Component { */
-  export const DivisionTable = ({
+export const DivisionTable = ({
     data,
     divisionFilterList,
     superiorDivisionFilterList,
@@ -18,20 +17,6 @@ import './DivisionTable.css';
     totalItems,
     pageSize,
     }) => {
-  /* state = {
-    pagination: {
-      current: 1,
-      pagSize: 5,
-    },
-    loading: false,
-  }; */
-
-  /* componentDidMount() {
-    const { pagination } = this.state;
-    console.log("total", this.props.totalItems)
-    this.fetch({ pagination });
-  } */
-
   
   const [pagination, setPagination] = useState({current: 1, pageSize: 10});
   const [loading, setLoading] = useState(false);
@@ -75,16 +60,11 @@ import './DivisionTable.css';
       setFilterColumn(null);
       setFilterValue(null);
     }
-    /*  else if(params.superior_division_id && params.superior_division_id.length > 0) {
-      this.props.setFilterColumn('superior_division_id');
-      this.props.setFilterValue(params.superior_division_id);
-    } */
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
 
-  /* render() { */
     const columns = [
       {
         title: 'División',
@@ -97,8 +77,6 @@ import './DivisionTable.css';
         title: 'División superior',
         dataIndex: ['superior_division', 'name'],
         key: 'superior_division',
-        /* sorter: true, */
-        /* filters: this.props.superiorDivisionFilterList, */
       },
       {
         title: 'Colaboradores',
@@ -118,9 +96,6 @@ import './DivisionTable.css';
         dataIndex: 'subdivisions',
         key: 'subdivisions',
         sorter: true,
-        /* render: (subdivisions) => (
-          <p className='subdivision-container'><p>{subdivisions}</p><p className='plus-button'></p></p>            
-        ), */
       },
       {
         title: 'Embajadores',
@@ -141,8 +116,4 @@ import './DivisionTable.css';
           onChange={handleTableChange}
         />
     );
-  /* } */
 };
-
-/* export default DivisionTable;
- */

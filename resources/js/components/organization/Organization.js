@@ -9,7 +9,6 @@ const { TabPane } = Tabs;
 const columns = [
   { key: 'default', value: 'Columnas' },
   { key: 'name', value: 'División' },
-  /* { key: 'superior_division', value: 'División superior' }, */
   { key: 'collaborators', value: 'Colaboradores' },
   { key: 'level', value: 'Nivel' },
   { key: 'ambassador_name', value: 'Embajadores' },
@@ -27,14 +26,13 @@ export const Organization = () => {
   const [sortColumn, setSortColumn] = useState(null);
   const [sortValue, setSortValue] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagSize, setPagSize] = useState(10);
   const [totalItems, setTotalItems] = useState(null);
   const [pages, setPages] = useState(null);
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(async () => {
     try {
-      let res1 = await fetch(`${BACKEND_URL}/filters?type=name`, {
+      let res1 = await fetch(`${BACKEND_URL}/api/filters?type=name`, {
         method: 'GET'
       });
       let data1 = await res1.json();
@@ -47,7 +45,7 @@ export const Organization = () => {
       });
       setDivisionFilterList(newArray1);
 
-      let res2 = await fetch(`${BACKEND_URL}/filters?type=superior_division_id`, {
+      let res2 = await fetch(`${BACKEND_URL}/api/filters?type=superior_division_id`, {
         method: 'GET'
       });
       let data2 = await res2.json();
@@ -60,7 +58,7 @@ export const Organization = () => {
       });
       setSuperiorDivisionFilterList(newArray2);
 
-      let res3 = await fetch(`${BACKEND_URL}/filters?type=level`, {
+      let res3 = await fetch(`${BACKEND_URL}/api/filters?type=level`, {
         method: 'GET'
       });
       let data3 = await res3.json();
@@ -73,14 +71,13 @@ export const Organization = () => {
       });
       setLevelFilterList(newArray3);
 
-      console.log(`Searching current: ${currentPage}, pagSize: ${pageSize}`)
-      let resDivisionList = await fetch(`${BACKEND_URL}/divisions?page=${currentPage}&size=${pagSize}`, {
+      console.log(`Searching current: ${currentPage}, pageSize: ${pageSize}`)
+      let resDivisionList = await fetch(`${BACKEND_URL}/api/divisions?page=${currentPage}&size=${pageSize}`, {
         method: 'GET'
       });
       let dataDivisionList = await resDivisionList.json();
       setDivisionList(dataDivisionList.data);
       setTotalItems(dataDivisionList.total);
-      //setPages(dataDivisionList.pages);
     } catch (error) {
       console.log('Error al buscar la lista de filtros');
     }
@@ -89,7 +86,7 @@ export const Organization = () => {
   useEffect(async () => {
     let searchQuery = '';
     console.log("page", currentPage)
-    console.log("page size", pagSize)
+    console.log("page size", pageSize)
     if(sortColumn && sortValue) {
       console.log("sort column", sortColumn)
       console.log("sort value", sortValue)
@@ -105,7 +102,7 @@ export const Organization = () => {
         console.log("filter value", filterValue)
         searchQuery = searchQuery + `type=${filterColumn}&value=${filterValue}`;
         console.log("Se buscará ", searchQuery);
-        let resDivisionList = await fetch(`${BACKEND_URL}/filter-data?${searchQuery}`, {
+        let resDivisionList = await fetch(`${BACKEND_URL}/api/filter-data?${searchQuery}`, {
           method: 'GET'
         });
         let dataDivisionList = await resDivisionList.json();
@@ -121,7 +118,7 @@ export const Organization = () => {
           console.log("search text", searchText)
           searchQuery = searchQuery + `type=${selectedColumn}&value=${searchText}`;
           console.log("Se buscará ", searchQuery);
-          let resDivisionList = await fetch(`${BACKEND_URL}/search?${searchQuery}`, {
+          let resDivisionList = await fetch(`${BACKEND_URL}/api/search?${searchQuery}`, {
             method: 'GET'
           });
           let dataDivisionList = await resDivisionList.json();
@@ -137,7 +134,7 @@ export const Organization = () => {
           searchQuery = searchQuery.slice(0, -1);
         }
         console.log("search", searchQuery)
-        let resDivisionList = await fetch(`${BACKEND_URL}/divisions?${searchQuery}`, {
+        let resDivisionList = await fetch(`${BACKEND_URL}/api/divisions?${searchQuery}`, {
           method: 'GET'
         });
         let dataDivisionList = await resDivisionList.json();
@@ -149,36 +146,6 @@ export const Organization = () => {
       }
     }
   },[filterColumn, filterValue, sortColumn, sortValue, selectedColumn, searchText, currentPage, pageSize]);
-
-  /*useEffect(async () => {
-    console.log("sc", selectedColumn)
-    console.log("st", searchText)
-    if(selectedColumn && searchText && selectedColumn != 'default') {
-      try {
-        let searchQuery = `type=${selectedColumn}&value=${searchText}`;
-        console.log("Se buscará ", searchQuery);
-        let resDivisionList = await fetch(`${BACKEND_URL}/search?${searchQuery}`, {
-          method: 'GET'
-        });
-        let dataDivisionList = await resDivisionList.json();
-        setDivisionList(dataDivisionList);
-      } catch (error) {
-        console.log('Error al buscar');
-      }
-    } else {
-      try {
-        let resDivisionList = await fetch(BACKEND_URL + '/divisions', {
-            method: 'GET'
-        });
-        let dataDivisionList = await resDivisionList.json();
-        setDivisionList(dataDivisionList);
-      } catch (error) {
-          console.log('Error al obtener las divisiones');
-      }
-    }
-  },[selectedColumn, searchText, sortColumn, sortValue]); */
-
-
 
   return (
     <div>
