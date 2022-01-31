@@ -1,0 +1,12 @@
+.dropdown {
+    width: 153px;
+    height: 32px;
+    margin: 0px 10px;
+    border-radius: 3px;
+}
+
+.search-input {
+    width: 213px;
+    height: 32px;
+    border-radius: 3px;
+}

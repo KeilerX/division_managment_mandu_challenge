@@ -1,0 +1,22 @@
+.first {
+    padding: 8px;
+}
+
+.input-filter {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.button {
+     width: 90px;
+}
+
+.plus-button {
+    width: 14px;
+    height: 14px;
+    background: rgba(73, 197, 169, 0.9);
+}
+
+.subdivision-container {
+    display: flex;
+}
