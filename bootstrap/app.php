@@ -41,11 +41,6 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-$env = $app->detectEnvironment(array(
-    // The array value should be your hostname
-    'local' => array('LAPTOP-4UH61CII'),
-));
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application

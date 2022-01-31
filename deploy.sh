@@ -2,5 +2,5 @@
 php artisan migrate:fresh
 
 #Run seeders with factory
-php artisan db:seed
+php artisan db:seed --force
 
