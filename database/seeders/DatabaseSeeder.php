@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Division::factory(200)->create();
-        //$this->call(DivisionSeeder::class);
+        //\App\Models\Division::factory(200)->create();
+        $this->call(DivisionSeeder::class);
     }
 }
