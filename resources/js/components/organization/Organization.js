@@ -32,7 +32,7 @@ export const Organization = () => {
 
   useEffect(async () => {
     try {
-      let res1 = await fetch(`${BACKEND_URL}api/filters?type=name`, {
+      let res1 = await fetch(`${BACKEND_URL}/api/filters?type=name`, {
         method: 'GET'
       });
       let data1 = await res1.json();
@@ -45,7 +45,7 @@ export const Organization = () => {
       });
       setDivisionFilterList(newArray1);
 
-      let res2 = await fetch(`${BACKEND_URL}api/filters?type=superior_division_id`, {
+      let res2 = await fetch(`${BACKEND_URL}/api/filters?type=superior_division_id`, {
         method: 'GET'
       });
       let data2 = await res2.json();
@@ -58,7 +58,7 @@ export const Organization = () => {
       });
       setSuperiorDivisionFilterList(newArray2);
 
-      let res3 = await fetch(`${BACKEND_URL}api/filters?type=level`, {
+      let res3 = await fetch(`${BACKEND_URL}/api/filters?type=level`, {
         method: 'GET'
       });
       let data3 = await res3.json();
@@ -72,7 +72,7 @@ export const Organization = () => {
       setLevelFilterList(newArray3);
 
       console.log(`Searching current: ${currentPage}, pageSize: ${pageSize}`)
-      let resDivisionList = await fetch(`${BACKEND_URL}api/divisions?page=${currentPage}&size=${pageSize}`, {
+      let resDivisionList = await fetch(`${BACKEND_URL}/api/divisions?page=${currentPage}&size=${pageSize}`, {
         method: 'GET'
       });
       let dataDivisionList = await resDivisionList.json();
@@ -102,7 +102,7 @@ export const Organization = () => {
         console.log("filter value", filterValue)
         searchQuery = searchQuery + `type=${filterColumn}&value=${filterValue}`;
         console.log("Se buscará ", searchQuery);
-        let resDivisionList = await fetch(`${BACKEND_URL}api/filter-data?${searchQuery}`, {
+        let resDivisionList = await fetch(`${BACKEND_URL}/api/filter-data?${searchQuery}`, {
           method: 'GET'
         });
         let dataDivisionList = await resDivisionList.json();
@@ -118,7 +118,7 @@ export const Organization = () => {
           console.log("search text", searchText)
           searchQuery = searchQuery + `type=${selectedColumn}&value=${searchText}`;
           console.log("Se buscará ", searchQuery);
-          let resDivisionList = await fetch(`${BACKEND_URL}api/search?${searchQuery}`, {
+          let resDivisionList = await fetch(`${BACKEND_URL}/api/search?${searchQuery}`, {
             method: 'GET'
           });
           let dataDivisionList = await resDivisionList.json();
@@ -134,7 +134,7 @@ export const Organization = () => {
           searchQuery = searchQuery.slice(0, -1);
         }
         console.log("search", searchQuery)
-        let resDivisionList = await fetch(`${BACKEND_URL}api/divisions?${searchQuery}`, {
+        let resDivisionList = await fetch(`${BACKEND_URL}/api/divisions?${searchQuery}`, {
           method: 'GET'
         });
         let dataDivisionList = await resDivisionList.json();
